@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Jumbo</title>
+  <style>
+
+    .form__group {
+      position: relative;
+      padding: 15px 0 0;
+      margin-top: 10px;
+      width: 50%;
+    }
+
+    .form__field {
+      font-family: inherit;
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid #9b9b9b;
+      outline: 0;
+      font-size: 1.3rem;
+      color: #fff;
+      padding: 7px 0;
+      background: transparent;
+      transition: border-color 0.2s;
+
+      /* &::placeholder {
+        color: transparent;
+      } */
+
+      /* &:placeholder-shown~.form__label {
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+      } */
+    }
+
+    .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: #9b9b9b;
+    }
+
+    .form__field:focus {
+      /* ~.form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: #11998e;
+        font-weight: 700;
+      } */
+
+      padding-bottom: 6px;
+      font-weight: 700;
+      border-width: 3px;
+      border-image: linear-gradient(to right, #11998e, #38ef7d);
+      border-image-slice: 1;
+    }
+
+    .wave {
+      width: 200px;
+      height: 50px;
+      background-color: #444857;
+      box-shadow: inset 0 0 50px rgba(0,0,0,.5);
+      position: relative;
+      left: 0;
+      top: 10px;
+      transition: 0.4s;
+
+    }
+    
+    /* reset input */
+    /* .form__field {
+
+      &:required,
+      &:invalid {
+        box-shadow: none;
+      }
+    } */
+
+    /* demo */
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-size: 1.5rem;
+      background-color: #222222;
+    }
+  </style>
+</head>
+
+<body style=" direction:ltr; margin-left: 50px; ">
+
+  <!-- <form action="/api/customer/Knearest" method="GET" id= "myForm" target="myiframe">  -->
+  <!-- <div style="text-align: center;"> -->
+
+    <div class="form__group field">
+      <!-- <label for="lat" class="form__label">latitude: </label> -->
+      <input type="text" name="lat" id="lat" placeholder="latitude" class="form__field" />
+    </div>
+    
+    <div class="form__group field">
+      <!-- <label for="lon" class="form__label">longitude: </label> -->
+      <input type="text" name="lon" id="lon" placeholder="longitude" class="form__field"   />
+    </div>
+
+    <button onclick="submitForm()" class="wave">Load</button>
+  <!-- </div> -->
+
+  <!-- </form> -->
+  <ul id="myList" style="float: left;">
+
+  </ul>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+  function submitForm() {
+
+    document.getElementById('myList').innerHTML = '';
+
+    const lat = document.getElementsByName('lat')[0].value;
+    const lon = document.getElementsByName('lon')[0].value;
+
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = async function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        //console.log(JSON.parse(this.responseText));
+        const data = JSON.parse(this.responseText);
+        console.log(data.data.k_nearest);
+        await Promise.all(data.data.k_nearest.map(store => {
+
+          //const textnode = document.createTextNode(store.addressName + store.street2 + store.street3);
+          let addressLabel = document.createElement('label')//.innerText = store.street3 + ', '+ store.addressName;
+          addressLabel.innerText = store.store.street2 + ', ' + store.store.addressName + '\n';
+
+          let latitudeLabel = document.createElement('label');
+          latitudeLabel.innerText = 'latitude' + ': ' + store.store.latitude + '\n';
+
+          let longitudeLabel = document.createElement('label');
+          longitudeLabel.innerText = 'longitude' + ': ' + store.store.longitude + '\n';
+
+          let postalCodeLabel = document.createElement('label')//.innerText = store.street3 + ', '+ store.addressName;
+          postalCodeLabel.innerText = 'postalCode' + ': ' + store.store.postalCode + '\n';
+
+          let closeLabel = document.createElement('label');
+          closeLabel.innerText = 'todayClose' + ': ' + store.store.todayClose + '\n';
+
+          let openLabel = document.createElement('label');
+          openLabel.innerText = 'todayOpen' + ': ' + store.store.todayOpen + '\n';
+
+          let uuidLabel = document.createElement('label');
+          uuidLabel.innerText = 'uuid' + ': ' + store.store.uuid + '\n' + '\n';
+
+          let newNode = document.createElement('li')//.append(addressLabel, closeLabel, closeLabel);
+          newNode.append(addressLabel, latitudeLabel, longitudeLabel, closeLabel, openLabel, postalCodeLabel, uuidLabel)
+          // newNode.appendChild(latitudeLabel)
+          // newNode.appendChild(longitudeLabel)
+          // newNode.appendChild(closeLabel)
+          // newNode.appendChild(openLabel)
+          // newNode.appendChild(postalCodeLabel)
+          // newNode.appendChild(uuidLabel)
+
+          document.getElementById("myList").appendChild(newNode);
+
+        }));
+      }
+    }
+    xmlhttp.open("GET", `/api/customer/Knearest?lat=${lat}&lon=${lon}`, true);
+    xmlhttp.send();
+  }
+
+
+</script>
