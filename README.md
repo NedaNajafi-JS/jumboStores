@@ -20,3 +20,7 @@ npm v8.1.2
  1. Open the browser
 
  2. open http://localhost:5005/api/customer
+
+
+#Notes
+1 Using MongoDB Atlas, No need to install or validate anything
