@@ -1,0 +1,29 @@
+{
+  "name": "jumbo",
+  "version": "1.0.0",
+  "description": "K-nearest jumbo supermarkets",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "Node.js",
+    "REST",
+    "MongoDB",
+    "Redis",
+    "unit-test"
+  ],
+  "author": "Neda Najafi",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "express": "^4.18.1",
+    "express-validation": "^4.1.0",
+    "express-validator": "^6.14.0",
+    "mocha": "^10.0.0",
+    "mongoose": "^6.3.3",
+    "node-cache": "^5.1.2",
+    "redis": "^4.1.0"
+  }
+}
