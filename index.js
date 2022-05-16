@@ -13,8 +13,8 @@ const customerAPIs = require('./routes/customerRoute');
 app.use('/api/customer', customerAPIs);
 
 mongoose
-  .connect("mongodb://localhost:27017/jumbo", { useNewUrlParser: true , useUnifiedTopology: true})
-  //.connect("mongodb+srv://jumboUser:n881113088@cluster0.llcux.mongodb.net/jumbo?retryWrites=true&w=majority", { useNewUrlParser: true , useUnifiedTopology: true})
+  //.connect("mongodb://localhost:27017/jumbo", { useNewUrlParser: true , useUnifiedTopology: true})
+  .connect("mongodb+srv://jumboUser:n881113088@cluster0.llcux.mongodb.net/jumbo?retryWrites=true&w=majority", { useNewUrlParser: true , useUnifiedTopology: true})
   .then(() => {
 
     console.log('MongoDB Connected');
