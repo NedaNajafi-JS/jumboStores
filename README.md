@@ -14,3 +14,9 @@ npm v8.1.2
     npm install
     
     npm run / node index
+    
+ #Load the project
+ 
+ 1. Open the browser
+
+ 2. Type this: 
