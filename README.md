@@ -25,3 +25,12 @@ npm v8.1.2
 #Notes
 
 Using MongoDB Atlas, No need to install or validate anything
+
+
+#Others
+
+node-cache
+
+Git CI/CT
+
+unit testing
