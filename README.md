@@ -19,4 +19,4 @@ npm v8.1.2
  
  1. Open the browser
 
- 2. Type this: 
+ 2. open http://localhost:5005/api/customer
