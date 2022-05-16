@@ -36,3 +36,5 @@ node-cache
 Git CI
 
 unit testing
+
+Load balancing with pm2: pm2 start ecosystem.config.js
