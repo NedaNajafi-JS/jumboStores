@@ -33,6 +33,6 @@ Express/REST
 
 node-cache
 
-Git CI/CT
+Git CI
 
 unit testing
