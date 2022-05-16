@@ -13,7 +13,7 @@ npm v8.1.2
 
     npm install
     
-    npm run / node index
+    node index
     
  #Load the project
  
