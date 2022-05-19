@@ -5,7 +5,7 @@ const path = require('path');
 
 const app = express()
 const port = process.env.PORT || 5005;
-alert(process.env.PORT)
+console.log(process.env.PORT)
 app.use(express.json());
 app.use(express.static(path.dirname(require.main.filename) + '/statics'));
 
