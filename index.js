@@ -13,7 +13,8 @@ const customerAPIs = require('./routes/customerRoute');
 app.use('/api/customer', customerAPIs);
 
 mongoose
-  .connect(`mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.llcux.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true , useUnifiedTopology: true})
+.connect(`mongodb+srv://nnajafi:Admin123456@cluster0.llcux.mongodb.net/Jumbo?retryWrites=true&w=majority`, { useNewUrlParser: true , useUnifiedTopology: true})
+// .connect(`mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.llcux.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true , useUnifiedTopology: true})
   .then(() => {
 
     console.log('MongoDB Connected');
