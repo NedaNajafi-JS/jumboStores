@@ -10,4 +10,7 @@ router
     .route('/Knearest')
     .get(validation.validate('K-nearest'), customerController.findKnearest);
 
+router
+    .route('/clustering').get(customerController.createList);
+
 module.exports = router;

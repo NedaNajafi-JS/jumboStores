@@ -22,13 +22,14 @@ const path = require('path');
 //     console.log('Connected!');
 // });
 
-exports.findHTML = (req, res, next) => {console.log(path.dirname(require.main.filename) + '/statics/customer.html')
+exports.findHTML = (req, res, next) => {
+    // console.log(path.dirname(require.main.filename) + '/statics/customer.html')
     res.sendFile(path.dirname(require.main.filename) + '/statics/customer.html');
 }
 exports.findKnearest = async (req, res, next) => {
     
     try{
-        
+        console.log(process.pid)
         const customerLat = req.query.lat;
         const customerLon = req.query.lon;
         const k = 5;
@@ -83,3 +84,20 @@ exports.findKnearest = async (req, res, next) => {
         });
     }
 }
+
+exports.createList = async(req, res) => {
+    await populateHugeList();
+    res.json({ ProcessId: 'Worker Process Id' + process.pid });
+};
+
+/* populate list with million elements
+ */
+populateHugeList = async() => {
+    let lst = new Array(1e6);
+        for(let k = 0; k < lst.length; k++) {
+        lst[k] = k*5;
+    }
+    // after populating elements
+    // fire a message informing master that list is created only in cluster mode
+    process.send('List is created on worker process id ' + process.pid);
+};
